@@ -1,15 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using System.Collections.Generic
 @{
-    <h1>Landing page wahhaha</h1>
- <fluent-button appearance="primary">Enabled state</fluent-button>
-<fluent-button disabled>Disabled state</fluent-button>
-<fluent-button disabled-focusable>Disabled focusable state</fluent-button>
-<fluent-button appearance="primary">Enabled state</fluent-button>
-<fluent-button appearance="primary" disabled>Disabled state</fluent-button>
-<fluent-button appearance="primary" disabled-focusable>
-  Disabled focusable state
+    ViewData["Title"] = "Landing Page";
+}
+
+<h1>Landing page</h1>
+
+<section>
+    <h2>MongoDB Test Connection</h2>
+    <p>@ViewBag.Message</p>
+
+    @if (ViewBag.Collections != null && ((List<string>)ViewBag.Collections).Count > 0)
+    {
+        <h3>Collections Found:</h3>
+        <ul>
+            @foreach (var collection in (List<string>)ViewBag.Collections)
+            {
+                <li>@collection</li>
+            }
+        </ul>
+    }
+</section>
+
+<fluent-button appearance="primary">
+    <a href="/TestConnection/Check" style="color: inherit; text-decoration: none;">
+        Test MongoDB Connection (detail page)
+    </a>
 </fluent-button>
 
-}
+<fluent-button appearance="primary">Enabled state</fluent-button>
+<fluent-button disabled>Disabled state</fluent-button>
+<fluent-button disabled-focusable>Disabled focusable state</fluent-button>
+

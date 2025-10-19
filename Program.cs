@@ -1,27 +1,41 @@
-var builder = WebApplication.CreateBuilder(args);
+using DotNetEnv;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+var builder = Run();
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+WebApplication Run()
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+
+    Env.Load(); // loads .env from the app root
+
+    var builder = WebApplication.CreateBuilder(args);
+
+    
+    builder.Services.AddControllersWithViews();
+
+    // Register MongoDBContext so controllers can receive it via DI
+    builder.Services.AddSingleton<FlowBoard_Project_Management_System_MVC.Data.MongoDBContext>();
+
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline.
+    if (!app.Environment.IsDevelopment())
+    {
+        app.UseExceptionHandler("/Home/Error");
+        app.UseHsts();
+    }
+
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
+
+    app.UseRouting();
+
+    app.UseAuthorization();
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Landing}/{action=getLandingPage}/{id?}");
+
+    app.Run();
+
+    return app;
 }
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Landing}/{action=getLandingPage}/{id?}");
-
-app.Run();
