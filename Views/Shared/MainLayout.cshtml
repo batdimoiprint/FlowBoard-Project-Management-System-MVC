@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <!-- ...existing code... -->
     <link rel="stylesheet" href="~/lib/jkanban/dist/jkanban.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/fluentui/dist/fluent-components.css" />
-    <script type="module" src="~/lib/fluentui/dist/web-components.js"></script>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" asp-append-version="true" />
+    <script type="module" src="~/lib/fluentui/dist/web-components.min.js"></script>
 </head>
 <body>
    
+    @await Html.PartialAsync("~/Views/Shared/Components/Header.cshtml")
+
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>

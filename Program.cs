@@ -33,7 +33,7 @@ WebApplication Run()
 
     app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Landing}/{action=getLandingPage}/{id?}");
+        pattern: "{controller=Auth}/{action=Login}/{id?}");
 
     app.Run();
 

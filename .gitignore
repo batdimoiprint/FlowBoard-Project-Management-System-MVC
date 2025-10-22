@@ -365,3 +365,4 @@ FodyWeavers.xsd
 
 # Local environment variables
 .env
+.github/copilot-instructions.md
